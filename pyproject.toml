@@ -1,0 +1,45 @@
+[project]
+name = "fast-log-queue"
+version = "0.1.0"
+requires-python = ">= 3.11"
+description = "Monorepo for API, worker, and infrastructure"
+authors = [{ name = "Dragos Catarahia", email = "dragos@catarahia.me" }]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.black]
+line-length = 120
+target-version = ['py311']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.ruff_cache
+  | .*/\.venv
+)/
+'''
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+# pyflakes, pycodestyle, isort
+select = ["F", "E", "W", "I001"]
+ignore-init-module-imports = true
+
+ignore = [
+    "E402", # module-import-not-at-top-of-file
+    "E501", # line-too-long (black handles this)
+    "E711", # none-comparison
+    "E712", # true-false-comparison
+]
+
+exclude = [".venv", ".git", ".ruff_cache"]
+
+[tool.ruff.lint.isort]
+default-section = "third-party"
+known-third-party = ["fastapi", "boto3"]
+
+[tool.ruff.lint.isort.sections]
+testing = ["pytest"]

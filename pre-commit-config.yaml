@@ -1,0 +1,30 @@
+default_language_version:
+  python: python3.11
+
+repos:
+  - repo: https://github.com/psf/black
+    rev: 24.4.2
+    hooks:
+      - id: black
+        types: [python]
+
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: v0.4.2
+    hooks:
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
+        types: [python]
+
+  - repo: https://github.com/RobertCraigie/pyright-python
+    rev: v1.1.364
+    hooks:
+      - id: pyright
+        types: [python]
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-docstring-first
+      - id: check-ast

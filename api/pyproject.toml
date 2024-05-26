@@ -1,0 +1,10 @@
+[project]
+name = "log-api-service"
+version = "0.1.0"
+requires-python = ">= 3.11"
+description = "API project using FastAPI for logging services"
+dependencies = ["fastapi>=0.1.16,<2.0.0"]
+
+[build-system]
+requires = ['setuptools>=40.8.0']
+build-backend = 'setuptools.build_meta'

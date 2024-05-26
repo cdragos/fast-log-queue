@@ -1,0 +1,2 @@
+- install pre-commit
+- create virtualenv for api
