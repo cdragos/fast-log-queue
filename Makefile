@@ -53,6 +53,14 @@ migrations:
 upgrade:
 	@$(ACTIVATE_DEV) && alembic upgrade head
 
+# Deploy the CDK stack
+deploy:
+	@node_modules/aws-cdk/bin/cdk deploy
+
+# Destroy the CDK stack
+destroy:
+	@node_modules/aws-cdk/bin/cdk destroy
+
 .PHONY: \
 	check_python \
 	create_dev_venv \
@@ -61,4 +69,6 @@ upgrade:
 	install_dev_requirements \
 	setup_dev \
 	migrations \
+	deploy \
+	destroy \
 	upgrade

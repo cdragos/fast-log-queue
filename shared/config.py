@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     POSTGRES_SERVER: str = "localhost"
     POSTGRES_USER: str = "postgres"
 
+    QUEUE_URL: str = ""
     SQLALCHEMY_ASYNC_DATABASE_URI: str = ""
 
     @field_validator("SQLALCHEMY_ASYNC_DATABASE_URI", mode="after")

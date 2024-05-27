@@ -154,3 +154,11 @@ cython_debug/
 
 # docker volumes
 data
+
+# node
+node_modules
+package-lock.json
+package.json
+
+# cdk
+cdk.out

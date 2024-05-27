@@ -1,3 +1,6 @@
 - install pre-commit
 - run makefile setup dev
 - docker compose build and up
+- use nix-shell -p python311 python311Packages.pip nodejs_20 zsh --run zsh
+- brew install awscli
+- cdk bootstrap for the first time
