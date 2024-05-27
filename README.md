@@ -1,2 +1,3 @@
 - install pre-commit
-- create virtualenv for api
+- run makefile setup dev
+- docker compose build and up

@@ -19,7 +19,6 @@ repos:
     rev: v1.1.364
     hooks:
       - id: pyright
-        types: [python]
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0

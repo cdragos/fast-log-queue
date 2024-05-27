@@ -3,7 +3,7 @@ DEV_VENV_DIR := .venv
 # Define the Python executable to use
 PYTHON := python3
 # Define the command to create a virtual environment
-VENV_CMD := $(PYTHON) -m venv $(BASE_VENV_DIR)
+VENV_CMD := $(PYTHON) -m venv $(DEV_VENV_DIR)
 # Define the command to activate the base virtual environment
 ACTIVATE_DEV := . $(DEV_VENV_DIR)/bin/activate
 
@@ -36,12 +36,22 @@ install_uv_dev: create_dev_venv
 install_dev_requirements: create_dev_venv
 	@$(ACTIVATE_DEV) && \
 	pip install uv && \
+	uv pip compile pyproject.toml -o requirements.txt && \
 	uv pip compile pyproject.toml --extra dev -o requirements-dev.txt && \
+	uv pip install -r requirements.txt \
 	uv pip install -r requirements-dev.txt
 
 # Setup the development environment
 setup_dev: install_dev_requirements
 	@echo -e "\n$(GREEN_BOLD)Development environment setup complete.$(RESET)\n"
+
+# Make a new Alembic migration
+migrations:
+	@$(ACTIVATE_DEV) && alembic revision --autogenerate
+
+# Upgrade the database to the latest revision
+upgrade:
+	@$(ACTIVATE_DEV) && alembic upgrade head
 
 .PHONY: \
 	check_python \
@@ -49,4 +59,6 @@ setup_dev: install_dev_requirements
 	install_uv_dev \
 	compile_dev_requirements \
 	install_dev_requirements \
-	setup_dev
+	setup_dev \
+	migrations \
+	upgrade

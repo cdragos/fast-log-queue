@@ -1,0 +1,15 @@
+version: "3.7"
+
+services:
+  db:
+    image: postgres:16.3
+    volumes:
+      - ./data/pg:/var/lib/postgresql/data/pg:z
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pg
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_DB=fastlogqueue
+    ports:
+      - 5434:5432
+    restart: always
