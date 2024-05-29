@@ -15,7 +15,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["aws-cdk-lib", "pytest"]
+dev = ["anyio", "aws-cdk-lib", "httpx", "moto[sqs]", "pytest"]
 
 [tool.black]
 line-length = 120
@@ -28,6 +28,10 @@ exclude = '''
   | .*/\.venv
 )/
 '''
+
+[tool.pytest.ini_options]
+python_files = ["test_*.py", "*_test.py", "tests.py"]
+
 
 [tool.pyright]
 exclude = ["alembic", "cdk"]
