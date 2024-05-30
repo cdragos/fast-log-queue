@@ -41,8 +41,12 @@ install_dev_requirements: create_dev_venv
 	uv pip install -r requirements.txt \
 	uv pip install -r requirements-dev.txt
 
+# Install pre-commit hooks
+install_pre_commit: install_dev_requirements
+	@$(ACTIVATE_DEV) && pre-commit install
+
 # Setup the development environment
-setup_dev: install_dev_requirements
+setup_dev: install_dev_requirements install_pre_commit
 	@echo -e "\n$(GREEN_BOLD)Development environment setup complete.$(RESET)\n"
 
 # Make a new Alembic migration
@@ -53,13 +57,21 @@ migrations:
 upgrade:
 	@$(ACTIVATE_DEV) && alembic upgrade head
 
+# Bootstrap the CDK stack
+bootstrap:
+	@node_modules/aws-cdk/bin/cdk bootstrap
+
 # Deploy the CDK stack
 deploy:
-	@node_modules/aws-cdk/bin/cdk deploy
+	@node_modules/aws-cdk/bin/cdk deploy --all
 
 # Destroy the CDK stack
 destroy:
 	@node_modules/aws-cdk/bin/cdk destroy
+
+# Run the unit tests
+tests:
+	@$(ACTIVATE_DEV) && pytest tests
 
 .PHONY: \
 	check_python \
@@ -71,4 +83,7 @@ destroy:
 	migrations \
 	deploy \
 	destroy \
-	upgrade
+	upgrade \
+	bootstrap \
+	tests \
+	install_pre_commit

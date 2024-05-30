@@ -15,7 +15,16 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["anyio", "aws-cdk-lib", "httpx", "moto[sqs]", "pytest"]
+dev = [
+    "anyio",
+    "aws-cdk-lib",
+    "greenlet",
+    "httpx",
+    "moto[sqs]",
+    "pre-commit",
+    "pytest",
+    "testcontainers",
+]
 
 [tool.black]
 line-length = 120

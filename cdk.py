@@ -1,6 +1,6 @@
 import aws_cdk as cdk
 
-from cdk.stack import FastLogQueueCdkStack
+from cdk.fast_log_queue_stack import FastLogQueueCdkStack
 
 # Create a new CDK app
 app = cdk.App()

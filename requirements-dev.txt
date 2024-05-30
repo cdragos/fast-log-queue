@@ -44,6 +44,8 @@ certifi==2024.2.2
     #   requests
 cffi==1.16.0
     # via cryptography
+cfgv==3.4.0
+    # via pre-commit
 charset-normalizer==3.3.2
     # via requests
 click==8.1.7
@@ -54,14 +56,22 @@ constructs==10.3.0
     # via aws-cdk-lib
 cryptography==42.0.7
     # via moto
+distlib==0.3.8
+    # via virtualenv
 dnspython==2.6.1
     # via email-validator
+docker==7.1.0
+    # via testcontainers
 email-validator==2.1.1
     # via fastapi
 fastapi==0.111.0
     # via fast-log-queue (pyproject.toml)
 fastapi-cli==0.0.4
     # via fastapi
+filelock==3.14.0
+    # via virtualenv
+greenlet==3.0.3
+    # via fast-log-queue (pyproject.toml)
 h11==0.14.0
     # via
     #   httpcore
@@ -74,6 +84,8 @@ httpx==0.27.0
     # via
     #   fast-log-queue (pyproject.toml)
     #   fastapi
+identify==2.5.36
+    # via pre-commit
 idna==3.7
     # via
     #   anyio
@@ -116,12 +128,18 @@ mdurl==0.1.2
     # via markdown-it-py
 moto==5.0.8
     # via fast-log-queue (pyproject.toml)
+nodeenv==1.9.0
+    # via pre-commit
 orjson==3.10.3
     # via fastapi
 packaging==24.0
     # via pytest
+platformdirs==4.2.2
+    # via virtualenv
 pluggy==1.5.0
     # via pytest
+pre-commit==3.7.1
+    # via fast-log-queue (pyproject.toml)
 psycopg2-binary==2.9.9
     # via fast-log-queue (pyproject.toml)
 publication==0.0.3
@@ -163,10 +181,12 @@ python-multipart==0.0.9
 pyyaml==6.0.1
     # via
     #   fastapi
+    #   pre-commit
     #   responses
     #   uvicorn
 requests==2.32.2
     # via
+    #   docker
     #   moto
     #   responses
 responses==0.25.0
@@ -189,6 +209,8 @@ sqlalchemy==2.0.30
     #   alembic
 starlette==0.37.2
     # via fastapi
+testcontainers==4.5.0
+    # via fast-log-queue (pyproject.toml)
 typeguard==2.13.3
     # via
     #   aws-cdk-asset-awscli-v1
@@ -208,23 +230,30 @@ typing-extensions==4.12.0
     #   pydantic
     #   pydantic-core
     #   sqlalchemy
+    #   testcontainers
     #   typer
 ujson==5.10.0
     # via fastapi
 urllib3==2.2.1
     # via
     #   botocore
+    #   docker
     #   requests
     #   responses
+    #   testcontainers
 uvicorn==0.29.0
     # via fastapi
 uvloop==0.19.0
     # via uvicorn
+virtualenv==20.26.2
+    # via pre-commit
 watchfiles==0.21.0
     # via uvicorn
 websockets==12.0
     # via uvicorn
 werkzeug==3.0.3
     # via moto
+wrapt==1.16.0
+    # via testcontainers
 xmltodict==0.13.0
     # via moto

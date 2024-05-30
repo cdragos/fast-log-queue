@@ -33,11 +33,14 @@ async def test_logs_endpoint_successfully_queues_log_entry(async_client, sqs_cli
     assert resp.status_code == HTTPStatus.OK
     assert resp.json() == {"message": "Log entry queued for processing"}
 
-    messages = sqs_client.receive_message(QueueUrl=settings.QUEUE_URL)
+    messages = sqs_client.receive_message(QueueUrl=settings.QUEUE_URL, MaxNumberOfMessages=1)
     assert "Messages" in messages
+    assert len(messages["Messages"]) > 0
 
     message = messages["Messages"][0]
-    assert json.loads(message["Body"]) == payload
+    body = json.loads(message["Body"])
+
+    assert body == payload
 
 
 async def test_logs_endpoint_handles_sqs_client_error(async_client, monkeypatch):
@@ -50,3 +53,12 @@ async def test_logs_endpoint_handles_sqs_client_error(async_client, monkeypatch)
         assert resp.json() == {
             "message": "Error occurred while sending message to SQS: An error occurred (Unknown) when calling the SendMessage operation: Test error"
         }
+
+
+async def test_logs_endpoint_validates_log_level(async_client):
+    payload = {"message": "Test log entry", "level": "INVALID"}
+
+    url = async_client._transport.app.url_path_for("logs")
+    resp = await async_client.post(url, json=payload)
+
+    assert resp.status_code == HTTPStatus.UNPROCESSABLE_ENTITY
